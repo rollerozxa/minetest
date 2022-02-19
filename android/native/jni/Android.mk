@@ -42,10 +42,10 @@ LOCAL_MODULE := Irrlicht
 LOCAL_SRC_FILES := deps/$(APP_ABI)/Irrlicht/libIrrlichtMt.a
 include $(PREBUILT_STATIC_LIBRARY)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := LuaJIT
-LOCAL_SRC_FILES := deps/$(APP_ABI)/LuaJIT/libluajit.a
-include $(PREBUILT_STATIC_LIBRARY)
+#include $(CLEAR_VARS)
+#LOCAL_MODULE := LuaJIT
+#LOCAL_SRC_FILES := deps/$(APP_ABI)/LuaJIT/libluajit.a
+#include $(PREBUILT_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := OpenAL
@@ -92,7 +92,7 @@ LOCAL_CFLAGS += \
 	-DUSE_CURL=1                    \
 	-DUSE_SOUND=1                   \
 	-DUSE_LEVELDB=0                 \
-	-DUSE_LUAJIT=1                  \
+	-DUSE_LUAJIT=0                  \
 	-DUSE_GETTEXT=1                 \
 	-DVERSION_MAJOR=${versionMajor} \
 	-DVERSION_MINOR=${versionMinor} \
@@ -115,12 +115,13 @@ LOCAL_C_INCLUDES := \
 	../../src/script                             \
 	../../lib/gmp                                \
 	../../lib/jsoncpp                            \
+	../../lib/lua/src                            \
+	../../lib/bitop                              \
 	deps/$(APP_ABI)/Curl/include                       \
 	deps/$(APP_ABI)/Freetype/include/freetype2         \
 	deps/$(APP_ABI)/Irrlicht/include                   \
 	deps/$(APP_ABI)/Gettext/include                    \
 	deps/$(APP_ABI)/Iconv/include                      \
-	deps/$(APP_ABI)/LuaJIT/include                     \
 	deps/$(APP_ABI)/OpenAL-Soft/include                \
 	deps/$(APP_ABI)/SQLite/include                     \
 	deps/$(APP_ABI)/Vorbis/include                     \
@@ -213,12 +214,15 @@ LOCAL_SRC_FILES += ../../lib/gmp/mini-gmp.c
 # JSONCPP
 LOCAL_SRC_FILES += ../../lib/jsoncpp/jsoncpp.cpp
 
+# LUA
+LOCAL_SRC_FILES += $(wildcard ../../lib/lua/src/*.c)
+LOCAL_SRC_FILES += ../../lib/bitop/bit.c
+
 LOCAL_STATIC_LIBRARIES += \
 	Curl libmbedcrypto libmbedtls libmbedx509 \
 	Freetype \
 	Iconv libcharset \
 	Irrlicht \
-	LuaJIT \
 	OpenAL \
 	Gettext \
 	SQLite3 \
