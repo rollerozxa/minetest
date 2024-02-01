@@ -48,7 +48,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 	#define _PSTAT64
 	#include <sys/pstat.h>
 #endif
-#if defined(__ANDROID__)
+#if defined(__ANDROID__) && !defined(SERVER)
 	#include "porting_android.h"
 #endif
 #if defined(__APPLE__)

@@ -143,7 +143,9 @@ int main(int argc, char *argv[])
 	g_logger.registerThread("Main");
 	g_logger.addOutputMaxLevel(&stderr_output, LL_ACTION);
 
+#if !defined(__ANDROID__) && !defined(SERVER)
 	porting::osSpecificInit();
+#endif
 
 	Settings cmd_args;
 	get_env_opts(cmd_args);

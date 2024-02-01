@@ -433,7 +433,9 @@ set(common_SRCS
 )
 
 if(ANDROID)
-	set(common_SRCS ${common_SRCS} porting_android.cpp)
+	if(NOT BUILD_SERVER)
+		set(common_SRCS ${common_SRCS} porting_android.cpp)
+	endif()
 endif()
 
 if(BUILD_UNITTESTS)

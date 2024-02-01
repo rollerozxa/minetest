@@ -487,7 +487,7 @@ void set_default_settings()
 	settings->setDefault("clickable_chat_weblinks", "true");
 #endif
 	// Altered settings for Android
-#ifdef __ANDROID__
+#if defined(__ANDROID__) && !defined(SERVER)
 	settings->setDefault("screen_w", "0");
 	settings->setDefault("screen_h", "0");
 	settings->setDefault("fullscreen", "true");
